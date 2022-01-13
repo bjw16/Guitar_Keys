@@ -109,6 +109,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return TextButton(
                         style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.zero))),
                           backgroundColor: (index == selected)
                               ? MaterialStateProperty.all(
                                   Colors.grey.shade200,

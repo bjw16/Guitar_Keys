@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
         title: Text(widget.title),
       ),
       body: Container(
@@ -110,7 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: ButtonStyle(
                             backgroundColor: (index == selected)
                                 ? MaterialStateProperty.all(
-                                    Colors.blueGrey.shade50)
+                                    Colors.grey.shade200,
+                                  )
                                 : MaterialStateProperty.all(Colors.blueGrey)),
                         child: Text(
                           Notes.elementAt(index).toString(),

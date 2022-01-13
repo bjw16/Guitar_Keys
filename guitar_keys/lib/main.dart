@@ -90,89 +90,81 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.info))],
-        backgroundColor: Colors.blueGrey,
-        title: Text(widget.title),
-      ),
-      body: Container(
-        color: Colors.grey.shade200,
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                color: Colors.blueGrey,
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width / 6,
-                child: ListView.builder(
-                    itemCount: Notes.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return TextButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.zero))),
-                          backgroundColor: (index == selected)
-                              ? MaterialStateProperty.all(
-                                  Colors.grey.shade200,
-                                )
-                              : MaterialStateProperty.all(Colors.blueGrey),
-                        ),
-                        child: Text(
-                          Notes.elementAt(index).toString(),
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            currentNote = Notes.elementAt(index).toString();
-                            currentList = NoteKeys[currentNote];
-                            selected = index;
-                          });
-                        },
-                      );
-                    }),
-              ),
-              Container(
-                  child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+        appBar: AppBar(
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.info))],
+          backgroundColor: Colors.blueGrey,
+          title: Text(widget.title),
+        ),
+        body: Container(
+            color: Colors.grey.shade200,
+            child: Center(
+              child: Row(mainAxisAlignment: MainAxisAlignment.start, children: <
+                  Widget>[
                 Container(
+                  color: Colors.blueGrey,
                   height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width / 3,
+                  width: MediaQuery.of(context).size.width / 6,
                   child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: currentList.length,
+                      itemCount: Notes.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                            decoration: BoxDecoration(
-                                border: Border(bottom: BorderSide())),
-                            height: 50,
-                            child: Center(
-                              child: Text(currentList[index]),
-                            ));
+                        return TextButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.zero))),
+                            backgroundColor: (index == selected)
+                                ? MaterialStateProperty.all(
+                                    Colors.grey.shade200,
+                                  )
+                                : MaterialStateProperty.all(Colors.blueGrey),
+                          ),
+                          child: Text(
+                            Notes.elementAt(index).toString(),
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              currentNote = Notes.elementAt(index).toString();
+                              currentList = NoteKeys[currentNote];
+                              selected = index;
+                            });
+                          },
+                        );
                       }),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: NoteNumber.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                            decoration: BoxDecoration(
-                                border: Border(bottom: BorderSide())),
-                            height: 50,
-                            child: Center(
-                              child: Text(NoteNumber[index].toString()),
-                            ));
-                      }),
-                )
-              ]))
-            ],
-          ),
-        ),
-      ),
-    );
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: currentList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                child: Container(
+                                  height: 50,
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(currentList[index]),
+                                        Text(NoteNumber[index].toString())
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+            )));
   }
 }

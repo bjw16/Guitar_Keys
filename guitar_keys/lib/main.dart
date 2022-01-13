@@ -92,16 +92,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.info))],
-          backgroundColor: Colors.blueGrey,
-          title: Text(widget.title),
+          backgroundColor: Colors.grey.shade400,
+          title: Text(
+            widget.title,
+          ),
         ),
         body: Container(
-            color: Colors.grey.shade200,
+            color: Colors.grey.shade100,
             child: Center(
               child: Row(mainAxisAlignment: MainAxisAlignment.start, children: <
                   Widget>[
                 Container(
-                  color: Colors.blueGrey,
+                  color: Colors.grey.shade400,
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width / 6,
                   child: ListView.builder(
@@ -111,13 +113,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.zero))),
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            )),
                             backgroundColor: (index == selected)
                                 ? MaterialStateProperty.all(
-                                    Colors.grey.shade200,
+                                    Colors.grey.shade100,
                                   )
-                                : MaterialStateProperty.all(Colors.blueGrey),
+                                : MaterialStateProperty.all(
+                                    Colors.grey.shade400),
                           ),
                           child: Text(
                             Notes.elementAt(index).toString(),
@@ -139,7 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Container(
                         height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width / 3,
+                        width: MediaQuery.of(context).size.width -
+                            MediaQuery.of(context).size.width / 6,
                         child: ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: currentList.length,
@@ -152,8 +156,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text(currentList[index]),
-                                        Text(NoteNumber[index].toString())
+                                        Container(
+                                            width: 50,
+                                            child: Center(
+                                                child:
+                                                    Text(currentList[index]))),
+                                        Container(
+                                            width: 50,
+                                            child: Center(
+                                                child: Text(NoteNumber[index]
+                                                    .toString())))
                                       ],
                                     ),
                                   ),

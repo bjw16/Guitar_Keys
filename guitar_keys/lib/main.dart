@@ -50,19 +50,19 @@ class MyHomePage extends StatefulWidget {
 //Column Selector Array
 Map NoteKeys = {
   "A♭": ["A♭", "B♭m", "Cm", "D♭", "E♭", "Fm", "Gdim"],
-  "A": ["A", "Bm", "C#m", "D", "E", "F#m", "G#dim"],
+  "A": ["A", "Bm", "C♯m", "D", "E", "F♯m", "G♯dim"],
   "B♭": ["B♭", "Cm", "Dm", "E♭", "F", "Gm", "Adim"],
-  "B": ["B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"],
+  "B": ["B", "C♯m", "D♯m", "E", "F♯", "G♯m", "A♯dim"],
   "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
-  "C#": ["C#", "D#m", "E#m", "F#", "G#", "A#m", "B#dim"],
+  "C♯": ["C♯", "D♯m", "E♯m", "F♯", "G♯", "A♯m", "B♯dim"],
   "D♭": ["D♭", "E♭m", "Fm", "G♭", "A♭", "B♭m", "Cdim"],
-  "D": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
+  "D": ["D", "Em", "F♯m", "G", "A", "Bm", "C♯dim"],
   "E♭": ["E♭", "Fm", "Gm", "A♭", "B♭", "Cm", "Ddim"],
-  "E": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
+  "E": ["E", "F♯m", "G♯m", "A", "B", "C♯m", "D♯dim"],
   "F": ["F", "Gm", "Am", "B♭", "C", "Dm", "Edim"],
-  "F#": ["F#", "G#m", "A#m", "B", "C#", "D#m", "E#dim"],
+  "F♯": ["F♯", "G♯m", "A♯m", "B", "C♯", "D♯m", "E♯dim"],
   "G♭": ["G♭", "A♭m", "B♭m", "C♭", "D♭", "E♭m", "Fdim"],
-  "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
+  "G": ["G", "Am", "Bm", "C", "D", "Em", "F♯dim"],
 };
 var Notes = {
   "A♭",
@@ -109,11 +109,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return TextButton(
                         style: ButtonStyle(
-                            backgroundColor: (index == selected)
-                                ? MaterialStateProperty.all(
-                                    Colors.grey.shade200,
-                                  )
-                                : MaterialStateProperty.all(Colors.blueGrey)),
+                          backgroundColor: (index == selected)
+                              ? MaterialStateProperty.all(
+                                  Colors.grey.shade200,
+                                )
+                              : MaterialStateProperty.all(Colors.blueGrey),
+                        ),
                         child: Text(
                           Notes.elementAt(index).toString(),
                           style: TextStyle(color: Colors.black),
@@ -139,6 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       itemCount: currentList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
+                            decoration: BoxDecoration(
+                                border: Border(bottom: BorderSide())),
                             height: 50,
                             child: Center(
                               child: Text(currentList[index]),
@@ -153,6 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       itemCount: NoteNumber.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
+                            decoration: BoxDecoration(
+                                border: Border(bottom: BorderSide())),
                             height: 50,
                             child: Center(
                               child: Text(NoteNumber[index].toString()),

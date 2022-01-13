@@ -80,9 +80,11 @@ var Notes = {
   "G♭",
   "G"
 };
+
 String currentNote = Notes.elementAt(0).toString();
 List currentList = NoteKeys[currentNote];
 List NoteNumber = ["I", "ii", "iii", "IV", "V", "vi", "vii"];
+int selected = 0;
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -91,54 +93,73 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 3,
-              child: ListView.builder(
-                  itemCount: Notes.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return TextButton(
-                      child: Text(
-                        Notes.elementAt(index).toString(),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          currentNote = Notes.elementAt(index).toString();
-                          currentList = NoteKeys[currentNote];
-                        });
-                      },
-                    );
-                  }),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 3,
-              child: ListView.builder(
-                  itemCount: currentList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                        child: Container(
-                      child: Text(currentList[index]),
-                    ));
-                  }),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 3,
-              child: ListView.builder(
-                  itemCount: NoteNumber.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                        child: Container(
-                      child: Text(NoteNumber[index].toString()),
-                    ));
-                  }),
-            )
-          ],
+      body: Container(
+        color: Colors.grey.shade200,
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                color: Colors.blueGrey,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width / 6,
+                child: ListView.builder(
+                    itemCount: Notes.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return TextButton(
+                        style: ButtonStyle(
+                            backgroundColor: (index == selected)
+                                ? MaterialStateProperty.all(
+                                    Colors.blueGrey.shade50)
+                                : MaterialStateProperty.all(Colors.blueGrey)),
+                        child: Text(
+                          Notes.elementAt(index).toString(),
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            currentNote = Notes.elementAt(index).toString();
+                            currentList = NoteKeys[currentNote];
+                            selected = index;
+                          });
+                        },
+                      );
+                    }),
+              ),
+              Container(
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: currentList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                            height: 50,
+                            child: Center(
+                              child: Text(currentList[index]),
+                            ));
+                      }),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: NoteNumber.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                            height: 50,
+                            child: Center(
+                              child: Text(NoteNumber[index].toString()),
+                            ));
+                      }),
+                )
+              ]))
+            ],
+          ),
         ),
       ),
     );
